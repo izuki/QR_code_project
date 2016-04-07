@@ -472,7 +472,7 @@ PRIVATE CONST UINT32 rs_block_num[QR_VERSION_MAX+1][QR_ECLEVEL_MAX] = {
 extern "C" {
 #endif
 
-void make_qr_code(char *pMsg, QR_MODE_N Mode, QR_ECLEVEL_N QRecLevel, int version );
+int make_qr_code(char *pMsg, QR_MODE_N Mode, QR_ECLEVEL_N QRecLevel, int version, BYTE **ppQRcode );
 
 #ifdef __cplusplus
 }

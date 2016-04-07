@@ -17,58 +17,50 @@
 /************************************************************************/
 /* ローカル関数プロトタイプ定義                                         */
 /************************************************************************/
-
-
-
-
-
 /************************************************************************/
 /* 外部公開関数                                                         */
 /************************************************************************/
 
-/****************************************************************************/
-/*  @brief  QRコードのモジュールサイズとモード種別から文字数指示子を返す    */
-/*  @param  version モジュールサイズ                                        */
-/*  @param  Mode    モード種別                                              */
-/*                                                                          */
-/*  @retval CharNumIndexLength  文字数指示子                                */
-/*                                                                          */
-/*  @note                                                                   */
-/*      モジュールサイズ：QRコード画像の大きさ                              */
-/*      モード種別：格納する文字の種類                                      */
-/*      文字数指示子：格納する文字数を定義するbit数                         */
-/****************************************************************************/
-PUBLIC int GetModeBits( char version, QR_MODE_N Mode ){
+/****************************************************************/
+/*  @brief  QRコードの大きさとモード種別から文字数指示子を返す	*/
+/*  @param  version: QRコード画像の大きさ                		*/
+/*  @param  Mode   : 格納する文字種別                      		*/
+/*                                                           	*/
+/*  @retval bit_len  格納する文字数を定義するbit長           	*/
+/*                                                          	*/
+/*  @note                                                   	*/
+/****************************************************************/
+int GetModeBits( char version, QR_MODE_N Mode ) {
 
-    int CharNumIndexLength = -1;
+    int bit_len = -1;
 
     if(1 <= version && version <= 9){
         switch(Mode){
-            case QR_MODE_NUM:   CharNumIndexLength = 10;    break;
-            case QR_MODE_AN:    CharNumIndexLength = 9;     break;
-            case QR_MODE_BYTE:  CharNumIndexLength = 8;     break;
-            case QR_MODE_KANJI: CharNumIndexLength = 8;     break;
+            case QR_MODE_NUM:   bit_len = 10;    break;
+            case QR_MODE_AN:    bit_len = 9;     break;
+            case QR_MODE_BYTE:  bit_len = 8;     break;
+            case QR_MODE_KANJI: bit_len = 8;     break;
         }
     }
     else if(10 <= version && version <= 26){
         switch(Mode){
-            case QR_MODE_NUM:   CharNumIndexLength = 12;    break;
-            case QR_MODE_AN:    CharNumIndexLength = 11;    break;
-            case QR_MODE_BYTE:  CharNumIndexLength = 16;    break;
-            case QR_MODE_KANJI: CharNumIndexLength = 10;    break;
+            case QR_MODE_NUM:   bit_len = 12;    break;
+            case QR_MODE_AN:    bit_len = 11;    break;
+            case QR_MODE_BYTE:  bit_len = 16;    break;
+            case QR_MODE_KANJI: bit_len = 10;    break;
         }
     }
     else if(27 <= version && version <= 40){
         switch(Mode){
-            case QR_MODE_NUM:   CharNumIndexLength = 14;    break;
-            case QR_MODE_AN:    CharNumIndexLength = 13;    break;
-            case QR_MODE_BYTE:  CharNumIndexLength = 16;    break;
-            case QR_MODE_KANJI: CharNumIndexLength = 12;    break;
+            case QR_MODE_NUM:   bit_len = 14;    break;
+            case QR_MODE_AN:    bit_len = 13;    break;
+            case QR_MODE_BYTE:  bit_len = 16;    break;
+            case QR_MODE_KANJI: bit_len = 12;    break;
         }
     }else{
         /* do nothing */
     }
-    return CharNumIndexLength;
+    return bit_len;
 }
 /****************************************************************************/
 /*  @brief  QRコードのモード種別から を返す                                 */
@@ -78,7 +70,7 @@ PUBLIC int GetModeBits( char version, QR_MODE_N Mode ){
 /*                                                                          */
 /*  @note                                                                   */
 /****************************************************************************/
-PUBLIC int GetModeDscrpt( QR_MODE_N Mode )
+int GetModeDscrpt( QR_MODE_N Mode )
 {
     int iRet = -1;
 
@@ -99,7 +91,7 @@ PUBLIC int GetModeDscrpt( QR_MODE_N Mode )
 /*  @note                                                                   */
 /*      英数字モードのみ文字を数値化する                                    */
 /****************************************************************************/
-PUBLIC int ChangeFontKindValue( char c ){
+int ChangeFontKindValue( char c ){
 
     int Val = -1;
 
@@ -149,7 +141,7 @@ PUBLIC int ChangeFontKindValue( char c ){
         case '.': Val = 42; break;
         case '/': Val = 43; break;
         case ':': Val = 44; break;
+        default:  Val = -1; break;
     }
     return Val;
 }
-

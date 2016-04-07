@@ -11,8 +11,6 @@
 #ifndef __QR_ECC_H__
 #define __QR_ECC_H__
 
-#include "qrapp.h"
-
-char *make_ecc_code( char *pQRdata, int version, QR_ECLEVEL_N QRecLevel);
+int make_ecc_code(char version, QR_ECLEVEL_N QRecLevel, char *pQRdata);
 
 #endif /* __QR_ECC_H__ */

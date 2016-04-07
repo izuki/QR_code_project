@@ -11,11 +11,8 @@
 #ifndef __QR_UTIL__
 #define __QR_UTIL__
 
-#include "type.h"
-
-
-PUBLIC int GetModeBits( char version, QR_MODE_N Mode );
-PUBLIC int GetModeDscrpt( QR_MODE_N Mode );
-PUBLIC int ChangeFontKindValue( char c );
+int GetModeBits( char version, QR_MODE_N Mode );
+int GetModeDscrpt( QR_MODE_N Mode );
+int ChangeFontKindValue( char c );
 
 #endif /* __QR_MAKE__ */
